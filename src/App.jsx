@@ -101,13 +101,13 @@ function App() {
     }
   };
 
-  const [rewards, setRewards] = useState([]);
-  const [stakedPSP, setStakedPSP] = useState([]);
+  const [rewards, setRewards] = useState([1391]);
+  const [stakedPSP, setStakedPSP] = useState([70000]);
 
   useEffect(() => {
     const stakers = ["0x1234"];
     const swappers = ["0x1234"];
-    setStakedPSP([30000]);
+    setStakedPSP([70000]);
     const gasSpentPerSwapper = [733];
     const volumeToRefund = 10000;
     const delegateParts = [value];
@@ -157,6 +157,9 @@ function App() {
       </header>
       <div className="main-container">
         <div className="sign-transaction-container">
+          <p>Gas Refund registration for swaps</p>
+        </div>
+        <div className="sign-transaction-container">
           <p>Delegate Refund</p>
           <div className="container-pourcentage">
             <Slider
@@ -184,7 +187,7 @@ function App() {
           </div>
           <p className="refund-infos">
             Expected reward = {Math.round(rewards[0])} $<br/>
-            Staked PSP = {Math.round(stakedPSP[0])} $<br/>
+            Staked PSP = {Math.round(stakedPSP[0])} PSP<br/>
             APY = {Math.round(rewards[0] / (stakedPSP[0] * 0.12)*100 * 100)/100} %
           </p>
           <button onClick={register}>Register</button>
