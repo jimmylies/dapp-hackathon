@@ -105,4 +105,26 @@ nav span:hover {
   border: 1px solid #2669f5;
 }
 
+.number-pourcentage {
+  width: 60px !important;
+}
 
+
+.number-pourcentage::before {
+  border: none !important;
+}
+
+
+
+.register {
+  background-color: #2669f5;
+  cursor: pointer;
+}
+
+.register span {
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  font-size: 1.2rem;
+  font-family: Inter, Arial, sans-serif;
+}

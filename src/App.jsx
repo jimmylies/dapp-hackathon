@@ -180,7 +180,7 @@ function App() {
                 step: 10,
                 min: 0,
                 max: portionRemaining,
-                type: "number",
+                type: "text",
                 "aria-labelledby": "input-slider",
               }}
             />
@@ -190,7 +190,7 @@ function App() {
             Staked PSP = {Math.round(stakedPSP[0])} PSP<br/>
             APY = {Math.round(rewards[0] / (stakedPSP[0] * 0.12)*100 * 100)/100} %
           </p>
-          <button onClick={register}>Register</button>
+          <button onClick={register} className="container-pourcentage register"><span>Register</span></button>
         </div>
       </div>
     </div>
