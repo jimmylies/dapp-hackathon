@@ -18,14 +18,10 @@ const Input = styled(MuiInput)`
 `;
 
 function App() {
-  const refreshUI = async () => {
-    getTotalShills();
-  };
-
   const [currentAccount, setCurrentAccount] = useState();
   const [allocatedShare, setAllocatedShare] = useState(30000);
 
-  const contractAddress = "0xE3060376e1713d3E462EBB583A09694a688dd1D0";
+  const contractAddress = "0x33ce061fb6341403d6576376F73aCC736f13d1e9";
   const contractABI = abi.output.abi;
 
   const baseFunction = () => {
@@ -49,7 +45,6 @@ function App() {
       const accounts = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length !== 0) {
         setCurrentAccount(accounts[0]);
-        refreshUI();
       } else connectWallet();
     }
   };
@@ -64,7 +59,6 @@ function App() {
       method: "eth_requestAccounts",
     });
     setCurrentAccount(accounts[0]);
-    refreshUI();
   };
 
   const register = async () => {
@@ -107,13 +101,13 @@ function App() {
     }
   };
 
-  const [rewards, setRewards] = useState([]);
-  const [stakedPSP, setStakedPSP] = useState([]);
+  const [rewards, setRewards] = useState([1391]);
+  const [stakedPSP, setStakedPSP] = useState([70000]);
 
   useEffect(() => {
     const stakers = ["0x1234"];
     const swappers = ["0x1234"];
-    setStakedPSP([30000]);
+    setStakedPSP([70000]);
     const gasSpentPerSwapper = [733];
     const volumeToRefund = 10000;
     const delegateParts = [value];
@@ -197,7 +191,20 @@ function App() {
               100}{" "}
             %
           </p>
+          <span className="check-span">
+            <input type="checkbox" id="checkMultiple" />
+            Automated registration for delegation
+          </span>
           <button onClick={register} className="container-pourcentage register">
+            <span>Register</span>
+          </button>
+        </div>
+        <div className="sign-transaction-container">
+          <p>Gas Refund registration for swaps</p>
+          <button
+            onClick={register}
+            className="container-pourcentage register lastButton"
+          >
             <span>Register</span>
           </button>
         </div>
