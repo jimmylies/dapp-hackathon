@@ -21,7 +21,7 @@ function App() {
   const [currentAccount, setCurrentAccount] = useState();
   const [allocatedShare, setAllocatedShare] = useState(30000);
 
-  const contractAddress = "0x33ce061fb6341403d6576376F73aCC736f13d1e9";
+  const contractAddress = "0x7e10DeD0434da7B2889A33A794B2e0E06f831Bb2";
   const contractABI = abi.output.abi;
 
   const baseFunction = () => {
@@ -36,16 +36,6 @@ function App() {
       );
 
       return delegateContract;
-    }
-  };
-
-  const checkIfWalletIsConnected = async () => {
-    const { ethereum } = window;
-    if (ethereum) {
-      const accounts = await ethereum.request({ method: "eth_accounts" });
-      if (accounts.length !== 0) {
-        setCurrentAccount(accounts[0]);
-      } else connectWallet();
     }
   };
 
@@ -202,7 +192,7 @@ function App() {
         <div className="sign-transaction-container">
           <p>Gas Refund registration for swaps</p>
           <button
-            onClick={register}
+            onClick={registerMultiple}
             className="container-pourcentage register lastButton"
           >
             <span>Register</span>

@@ -88,6 +88,8 @@ nav span:hover {
   color: #b7becb;
   font-size: 2rem;
   font-family: Inter, Arial, sans-serif;
+  align-items: center;
+  justify-content: center;
 }
 
 .sign-transaction-container:last-child {
@@ -130,10 +132,11 @@ nav span:hover {
 }
 
 .lastButton {
-  margin-top: 10rem;
+  /* margin-top: 10rem; */
 }
 
 .check-span {
   font-size: 1rem;
   color: #b7becb;
+  margin-bottom: 2rem;
 }
