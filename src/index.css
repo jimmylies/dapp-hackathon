@@ -49,6 +49,12 @@ nav span:hover {
   text-decoration: underline;
 }
 
+.refund-infos {
+  font-size: 0.6em;
+  color: #969696;
+  line-height: 1.4em;
+}
+
 .connect {
   margin: 0.5rem 1rem;
   padding: .1rem 1rem;
