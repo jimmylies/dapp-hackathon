@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import "./App.css";
 import abi from "./utils/Delegate.json";
-import {delegate} from "./delegate/delegate"
+import { delegate } from "./delegate/delegate";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+// import Checkbox from '@material-ui/core/Checkbox';
 import Slider from "@mui/material/Slider";
 import MuiInput from "@mui/material/Input";
-import {swappersRefund} from "./delegate/swappersRefund";
+import { swappersRefund } from "./delegate/swappersRefund";
 
 const Input = styled(MuiInput)`
   width: 25%;
@@ -75,6 +73,14 @@ function App() {
     await viewTxn.wait();
   };
 
+  const registerMultiple = async () => {
+    const delegateContract = baseFunction();
+    const viewTxn = await delegateContract.addStakerMultipleEpoch(
+      allocatedShare
+    );
+    await viewTxn.wait();
+  };
+
   const getTotalShills = async () => {
     const delegateContract = baseFunction();
     const count = await delegateContract.totalShills();
@@ -112,7 +118,7 @@ function App() {
     const volumeToRefund = 10000;
     const delegateParts = [value];
     setRewards(delegate(stakers, stakedPSP, delegateParts));
-    swappersRefund(swappers, gasSpentPerSwapper, volumeToRefund)
+    swappersRefund(swappers, gasSpentPerSwapper, volumeToRefund);
   }, [value]);
 
   return (
@@ -182,12 +188,18 @@ function App() {
               }}
             />
           </div>
+
           <p className="refund-infos">
-            Expected reward = {Math.round(rewards[0])} $<br/>
-            Staked PSP = {Math.round(stakedPSP[0])} $<br/>
-            APY = {Math.round(rewards[0] / (stakedPSP[0] * 0.12)*100 * 100)/100} %
+            Expected reward = {Math.round(rewards[0])} $<br />
+            Staked PSP = {Math.round(stakedPSP[0])} $<br />
+            APY ={" "}
+            {Math.round((rewards[0] / (stakedPSP[0] * 0.12)) * 100 * 100) /
+              100}{" "}
+            %
           </p>
-          <button onClick={register} className="container-pourcentage register"><span>Register</span></button>
+          <button onClick={register} className="container-pourcentage register">
+            <span>Register</span>
+          </button>
         </div>
       </div>
     </div>
