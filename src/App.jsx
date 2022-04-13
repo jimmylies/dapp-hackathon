@@ -19,7 +19,7 @@ const Input = styled(MuiInput)`
 
 function App() {
   const [currentAccount, setCurrentAccount] = useState();
-  const [allocatedShare, setAllocatedShare] = useState(30000/24);
+  const [allocatedShare, setAllocatedShare] = useState(30000 / 24);
 
   const contractAddress = "0x7e10DeD0434da7B2889A33A794B2e0E06f831Bb2";
   const contractABI = abi.output.abi;
@@ -64,6 +64,12 @@ function App() {
     );
     await viewTxn.wait();
   };
+  
+  const registerSwap = async () => {
+    const delegateContract = baseFunction();
+    const viewTxn = await delegateContract.addSwapper();
+    await viewTxn.wait();
+  };
 
   const getTotalShills = async () => {
     const delegateContract = baseFunction();
@@ -104,6 +110,16 @@ function App() {
     setRewards(delegate(stakers, stakedPSP, delegateParts));
     swappersRefund(swappers, gasSpentPerSwapper, volumeToRefund);
   }, [value]);
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheck = () => {
+    if (isChecked) {
+      setIsChecked(false);
+    } else {
+      setIsChecked(true);
+     }
+  };
 
   return (
     <div className="App">
@@ -174,7 +190,8 @@ function App() {
           </div>
 
           <p className="refund-infos">
-            Staked = {Math.round(stakedPSP[0])} PSP<br />
+            Staked = {Math.round(stakedPSP[0])} PSP
+            <br />
             Expected reward = {Math.round(rewards[0])} $<br />
             Current APY* ={" "}
             {Math.round((rewards[0] / (stakedPSP[0] * 0.12)) * 100 * 24 * 100) /
@@ -182,17 +199,29 @@ function App() {
             %
           </p>
           <span className="check-span">
-            <input type="checkbox" id="checkMultiple" />
+            <input type="checkbox" id="checkMultiple" onChange={handleCheck} />
             Automated registration for delegation for each epoch
           </span>
-          <button onClick={register} className="container-pourcentage register">
-            <span>Register</span>
-          </button>
+          {isChecked ? (
+            <button
+              onClick={registerMultiple}
+              className="container-pourcentage register"
+            >
+              <span>Register</span>
+            </button>
+          ) : (
+            <button
+              onClick={register}
+              className="container-pourcentage register"
+            >
+              <span>Register</span>
+            </button>
+          )}
         </div>
         <div className="sign-transaction-container">
           <p>Gas Refund registration for swaps</p>
           <button
-            onClick={registerMultiple}
+            onClick={registerSwap}
             className="container-pourcentage register lastButton"
           >
             <span>Register</span>
