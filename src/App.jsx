@@ -19,7 +19,7 @@ const Input = styled(MuiInput)`
 
 function App() {
   const [currentAccount, setCurrentAccount] = useState();
-  const [allocatedShare, setAllocatedShare] = useState(30000);
+  const [allocatedShare, setAllocatedShare] = useState(30000/24);
 
   const contractAddress = "0x7e10DeD0434da7B2889A33A794B2e0E06f831Bb2";
   const contractABI = abi.output.abi;
@@ -70,7 +70,7 @@ function App() {
     const count = await delegateContract.totalShills();
   };
 
-  const portionRemaining = 30000; //Call api to check the remaining portion for each address
+  const portionRemaining = 1250; //Call api to check the remaining portion for each address
 
   //input pourcentage
   const [value, setValue] = React.useState(portionRemaining);
@@ -91,7 +91,7 @@ function App() {
     }
   };
 
-  const [rewards, setRewards] = useState([1391]);
+  const [rewards, setRewards] = useState([1250]);
   const [stakedPSP, setStakedPSP] = useState([70000]);
 
   useEffect(() => {
@@ -129,7 +129,7 @@ function App() {
           <span>Dashboard</span>
         </nav>
         <img
-          src={"./header-icons.png"}
+          src={"./header-icons-polygon.png"}
           alt="navPart2"
           className="header-image"
         />
@@ -174,16 +174,16 @@ function App() {
           </div>
 
           <p className="refund-infos">
+            Staked = {Math.round(stakedPSP[0])} PSP<br />
             Expected reward = {Math.round(rewards[0])} $<br />
-            Staked PSP = {Math.round(stakedPSP[0])} $<br />
-            APY ={" "}
-            {Math.round((rewards[0] / (stakedPSP[0] * 0.12)) * 100 * 100) /
+            Current APY* ={" "}
+            {Math.round((rewards[0] / (stakedPSP[0] * 0.12)) * 100 * 24 * 100) /
               100}{" "}
             %
           </p>
           <span className="check-span">
             <input type="checkbox" id="checkMultiple" />
-            Automated registration for delegation
+            Automated registration for delegation for each epoch
           </span>
           <button onClick={register} className="container-pourcentage register">
             <span>Register</span>
