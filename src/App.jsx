@@ -158,7 +158,7 @@ function App() {
               className="range-pourcentage"
             />
             <Input
-              value={value}
+              value={value+ " $"}
               size="small"
               onChange={handleInputChange}
               onBlur={handleBlur}
